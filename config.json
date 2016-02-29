@@ -1,0 +1,4 @@
+{
+    "connectionString": "mongodb://arnisagent:Arn1sAg3nt@ds062898.mlab.com:62898/arnisweb",
+    "database": "arnisweb"
+}
