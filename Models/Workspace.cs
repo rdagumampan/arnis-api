@@ -23,5 +23,14 @@ namespace Arnis.API.Models
 
         [JsonProperty("solutions")]
         public List<Solution> Solutions { get; set; } = new List<Solution>();
+
+        [JsonProperty("logs")]
+        public List<string> Logs { get; set; }
+
+        [JsonProperty("dateCreated")]
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+
+        [JsonProperty("dateUpdated")]
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
     }
 }

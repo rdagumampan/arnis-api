@@ -1,7 +1,6 @@
 
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Arnis.API.Models
 {
@@ -15,5 +14,11 @@ namespace Arnis.API.Models
 
         [JsonProperty("userName")]
         public string UserName { get; set; }
+
+        [JsonProperty("dateCreated")]
+        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+
+        [JsonProperty("dateUpdated")]
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
     }
 }

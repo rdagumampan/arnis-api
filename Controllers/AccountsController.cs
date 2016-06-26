@@ -80,7 +80,7 @@ namespace Arnis.Web.Controllers
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return new ObjectResult(new
                 {
-                    errorMessage = "Account with desired username already exists."
+                    errorMessage = "Username already exists."
                 });
             }
         }

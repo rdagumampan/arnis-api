@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using Microsoft.AspNet.Mvc;
 using Arnis.API.Repositiories;
@@ -33,13 +34,29 @@ namespace Arnis.Web.ApiControllers
 
             if (null != account)
             {
-                //update workspace
-                var workspace = new Workspace
+                //find the workspace
+                var workspace = _workspaceRepository.GetByName(account.Id, workspaceDto.Name);
+                if (null == workspace)
                 {
-                    AccountId = account.Id,
-                    Solutions = workspaceDto.Solutions
-                };
-                _workspaceRepository.Create(workspace);
+                    workspace = new Workspace
+                    {
+                        AccountId = account.Id,
+
+                        Name = workspaceDto.Name,
+                        Description = workspaceDto.Description,
+                        Owners = workspaceDto.Owners,
+                        Solutions = workspaceDto.Solutions,
+                        Logs = workspaceDto.Logs
+                    };
+                    _workspaceRepository.Create(workspace);
+                }
+                else
+                {
+                    workspace.Solutions = workspaceDto.Solutions;
+                    workspace.Logs = workspace.Logs;
+                    workspace.DateUpdated = DateTime.UtcNow;
+                    _workspaceRepository.Update(workspace);
+                }
 
                 string workspaceLocation = $"{Request.Scheme}://{Request.Host}/workspaces/{workspace.Name.ToLower()}";
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;

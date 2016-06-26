@@ -8,6 +8,7 @@ namespace Arnis.API.Repositiories
     public interface IWorkspaceRepository
     {
         Task Create(Workspace workspace);
-        Workspace GetByName(string workspaceName);
+        Task Update(Workspace workspace);
+        Workspace GetByName(string accountId, string workspaceName);
     }
 }

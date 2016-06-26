@@ -11,13 +11,15 @@ namespace Arnis.API.Repositiories
 {
     public class AccountRepository : RepositoryBase, IAccountRepository
     {
+        private readonly string collectionId = "accounts";
+
         public AccountRepository()
         {
         }
 
         public async Task Create(Account account)
         {
-            await this.Client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(this.Database, "accounts"), account);
+            await this.Client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(this.Database, collectionId), account);
             Debug.WriteLine("Created Account {0}", account.UserName);
         }
 
@@ -25,7 +27,7 @@ namespace Arnis.API.Repositiories
         {
             try
             {
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(Database, "accounts");
+                var collectionUri = UriFactory.CreateDocumentCollectionUri(Database, collectionId);
                 var queryOptions = new FeedOptions { MaxItemCount = -1 };
                 var account = this.Client.CreateDocumentQuery<Account>(
                         collectionUri, queryOptions)
@@ -49,7 +51,7 @@ namespace Arnis.API.Repositiories
         {
             try
             {
-                var collectionUri = UriFactory.CreateDocumentCollectionUri(Database, "accounts");
+                var collectionUri = UriFactory.CreateDocumentCollectionUri(Database, collectionId);
                 var queryOptions = new FeedOptions { MaxItemCount = -1 };
                 var account = this.Client.CreateDocumentQuery<Account>(
                         collectionUri, queryOptions)
