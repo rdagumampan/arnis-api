@@ -1,17 +1,17 @@
 using System.Collections.Generic;
-using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public class Project: MongoBase
+    public class Project: DocumentBase
     {
-        [BsonElement("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [BsonElement("location")]
+        [JsonProperty("location")]
         public string Location { get; set; }
 
-        [BsonElement("dependencies")]
+        [JsonProperty("dependencies")]
         public List<Dependency> Dependencies { get; set; } = new List<Dependency>();
     }
 }

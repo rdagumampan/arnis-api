@@ -1,16 +1,16 @@
-using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public class Dependency: MongoBase
+    public class Dependency: DocumentBase
     {
-        [BsonElement("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [BsonElement("version")]
+        [JsonProperty("version")]
         public string Version { get; set; }
 
-        [BsonElement("location")]
+        [JsonProperty("location")]
         public string Location { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Arnis.API.Models
 {
-    public class AccountRequest
+    public class AccountCreateRequest
     {
         public string UserName { get; set; }
     }

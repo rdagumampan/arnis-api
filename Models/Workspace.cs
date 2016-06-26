@@ -1,23 +1,27 @@
+using System;
 using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public class Workspace: MongoBase
+    public class Workspace: DocumentBase
     {
-        public ObjectId AccountId { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        [BsonElement("name")]
+        [JsonProperty("accountId")]
+        public string AccountId { get; set; }
+
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [BsonElement("description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
-        [BsonElement("owners")]
+        [JsonProperty("owners")]
         public List<string> Owners { get; set; }
 
-        [BsonElement("solutions")]
+        [JsonProperty("solutions")]
         public List<Solution> Solutions { get; set; } = new List<Solution>();
     }
 }

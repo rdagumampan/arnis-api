@@ -1,19 +1,19 @@
-using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public abstract class VersionInfo: MongoBase
+    public abstract class VersionInfo: DocumentBase
     {
-        [BsonElement("major")]
+        [JsonProperty("major")]
         public int Major { get; set; }
 
-        [BsonElement("minor")]
+        [JsonProperty("minor")]
         public int Minor { get; set; }
 
-        [BsonElement("build")]
+        [JsonProperty("build")]
         public int Build { get; set; }
 
-        [BsonElement("revision")]
+        [JsonProperty("revision")]
         public int Revision { get; set; }
     }
 }

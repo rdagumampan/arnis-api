@@ -1,20 +1,20 @@
 using System.Collections.Generic;
-using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public class Solution : MongoBase
+    public class Solution : DocumentBase
     {
-        [BsonElement("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [BsonElement("location")]
+        [JsonProperty("location")]
         public string Location { get; set; }
 
-        [BsonElement("projects")]
+        [JsonProperty("projects")]
         public List<Project> Projects { get; set; } = new List<Project>();
 
-        [BsonElement("dependencies")]
+        [JsonProperty("dependencies")]
         public List<Dependency> Dependencies { get; set; } = new List<Dependency>();
     }
 }

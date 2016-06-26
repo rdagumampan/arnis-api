@@ -1,41 +1,41 @@
 using System.Collections.Generic;
-using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public abstract class DependencyInfo: MongoBase
+    public abstract class DependencyInfo: DocumentBase
     {
-        [BsonElement("dependencyId")]
+        [JsonProperty("dependencyId")]
         public string DependencyId { get; set; }
 
-        [BsonElement("version")]
+        [JsonProperty("version")]
         public VersionInfo Version { get; set; }
 
-        [BsonElement("title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-        [BsonElement("description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
-        [BsonElement("authors")]
+        [JsonProperty("authors")]
         public List<string> Authors { get; set; }
 
-        [BsonElement("owners")]
+        [JsonProperty("owners")]
         public List<string> Owners { get; set; }
 
-        [BsonElement("licenseUrl")]
+        [JsonProperty("licenseUrl")]
         public string LicenseUrl { get; set; }
 
-        [BsonElement("projectUrl")]
+        [JsonProperty("projectUrl")]
         public string ProjectUrl { get; set; }
 
-        [BsonElement("iconUrl")]
+        [JsonProperty("iconUrl")]
         public string IconUrl { get; set; }
 
-        [BsonElement("tags")]
+        [JsonProperty("tags")]
         public List<string> Tags { get; set; }
 
-        [BsonElement("dependencies")]
+        [JsonProperty("dependencies")]
         public List<DependencyInfo> Dependencies { get; } = new List<DependencyInfo>();
     }
 }
