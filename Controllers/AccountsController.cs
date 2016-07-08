@@ -31,6 +31,7 @@ namespace Arnis.Web.Controllers
             }
 
             //check if account already exists
+            var userName = request.Email.Substring(0, request.Email.IndexOf("@", StringComparison.Ordinal));
             var accountExists = _accountRepository
                 .GetByUserName(request.UserName)                
                 != null;
@@ -43,7 +44,8 @@ namespace Arnis.Web.Controllers
                 //create client account
                 var account = new Account
                 {
-                    UserName = request.UserName,
+                    UserName = userName,
+                    Email = request.Email,
                     ApiKey = apiKey
                 };
                 await _accountRepository.Create(account);
@@ -60,15 +62,15 @@ namespace Arnis.Web.Controllers
                 await _workspaceRepository.Create(workspace);
 
                 string accountLocation = $"{Request.Scheme}://{Request.Host}/accounts/{account.UserName.ToLower()}";
-                string workspaceLocation = $"{Request.Scheme}://{Request.Host}/workspaces/{workspace.Name.ToLower()}";
+                string workspaceLocation = $"{Request.Scheme}://{Request.Host}/{account.UserName}/workspaces/{workspace.Name.ToLower()}";
 
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
                 HttpContext.Response.Headers.Add("Location", accountLocation);
                 var responseDto = new
                 {
                     userName = request.UserName,
+                    email = request.Email,
                     apiKey,
-                    workspace = workspace.Name,
                     accountUri = accountLocation,
                     workspaceUri = workspaceLocation
                 };

@@ -4,36 +4,38 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
-using Microsoft.Extensions.OptionsModel;
 
 namespace Arnis.API.Repositiories
 {
     public abstract class RepositoryBase
     {
+        protected string Database => "arnisdb";
         private const string EndpointUri = "https://arnisdb.documents.azure.com:443/";
         private const string PrimaryKey = "Qz1iWZxei7SN7CKlkUB8rEf4ECHjDtMjdtQcjXEQbDKEr5gDqlocsLXdqQ2EyIj17EEIcwyZ0VIy33uCmyM75g==";
-        private DocumentClient _client;
 
         protected RepositoryBase()
         {
-            InitializeDB().Wait();
+            InitializeDb().Wait();
         }
 
-        protected string Database => "arnisdb";
+        private DocumentClient _client;
         protected DocumentClient Client => _client;
 
-        private async Task InitializeDB()
+        private async Task InitializeDb()
         {
             this._client = new DocumentClient(new Uri(EndpointUri), PrimaryKey);
 
             await this.CreateDatabaseIfNotExists(Database);
             await this.CreateDocumentCollectionIfNotExists(Database, "accounts");
             await this.CreateDocumentCollectionIfNotExists(Database, "workspaces");
+            await this.CreateDocumentCollectionIfNotExists(Database, "dependencies");
+            await this.CreateDocumentCollectionIfNotExists(Database, "dependencyhits");
+            await this.CreateDocumentCollectionIfNotExists(Database, "workspacehits");
         }
 
         private async Task CreateDatabaseIfNotExists(string databaseName)
         {
-            // check to verify a database with the id=FamilyDB does not exist
+            // check to verify a database with the id=arnisdb does not exist
             try
             {
                 await this._client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(databaseName));

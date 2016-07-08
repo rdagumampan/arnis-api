@@ -58,14 +58,14 @@ namespace Arnis.Web.ApiControllers
                     _workspaceRepository.Update(workspace);
                 }
 
-                string workspaceLocation = $"{Request.Scheme}://{Request.Host}/workspaces/{workspace.Name.ToLower()}";
+                string workspaceLocation = $"{Request.Scheme}://{Request.Host}/{account.UserName.ToLower()}/workspaces/{workspace.Name.ToLower()}";
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
                 HttpContext.Response.Headers.Add("Location", workspaceLocation);
 
                 var responseDto = new
                 {
                     workspace = workspace.Name,
-                    location = workspaceLocation
+                    workspaceUri = workspaceLocation
                 };
 
                 return new HttpOkObjectResult(responseDto);

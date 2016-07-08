@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 
 namespace Arnis.API.Models
 {
-    public class Workspace: DocumentBase
+    public class Workspace : DocumentBase
     {
         [JsonProperty("id")]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString().Substring(0, 4);
 
         [JsonProperty("accountId")]
         public string AccountId { get; set; }
