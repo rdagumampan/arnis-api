@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Arnis.API.Models;
-using Arnis.Core.Documents;
+using Arnis.Documents;
 
 namespace Arnis.API.Models
 {

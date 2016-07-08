@@ -3,7 +3,7 @@ using System.Net;
 using Microsoft.AspNet.Mvc;
 using Arnis.API.Repositiories;
 using Arnis.API.Models;
-using Arnis.Core.Documents;
+using Arnis.Documents;
 
 namespace Arnis.Web.ApiControllers
 {
@@ -37,6 +37,8 @@ namespace Arnis.Web.ApiControllers
             {
                 //find the workspace
                 var workspace = _workspaceRepository.GetByName(account.Id, workspaceDto.Name);
+
+                //create new workspace
                 if (null == workspace)
                 {
                     workspace = new Workspace
@@ -51,6 +53,7 @@ namespace Arnis.Web.ApiControllers
                     };
                     _workspaceRepository.Create(workspace);
                 }
+                //update existing workspace
                 else
                 {
                     workspace.Solutions = workspaceDto.Solutions;

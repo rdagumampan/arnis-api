@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Arnis.Core.Documents;
+using Arnis.Documents;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 

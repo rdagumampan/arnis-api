@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Arnis.Core.Documents;
+using Arnis.Documents;
 
 namespace Arnis.API.Repositiories
 {
