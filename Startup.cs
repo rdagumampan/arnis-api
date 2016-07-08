@@ -34,13 +34,14 @@ namespace Arnis.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.Properties["host.AppMode"] = "development";
+                
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseDeveloperExceptionPage();
             app.UseIISPlatformHandler();
-
             app.UseStaticFiles();
-
             app.UseMvc();
         }
 

@@ -16,6 +16,7 @@ namespace Arnis.API.Repositiories
         public WorkspaceRepository()
         {
         }
+
         public async Task Create(Workspace workspace)
         {
             await this.Client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(this.Database, collectionId), workspace);

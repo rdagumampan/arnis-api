@@ -29,55 +29,67 @@ namespace Arnis.Web.ApiControllers
                 return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 
-            //validate api key
-            var account = _accountRepository
-                .GetByApiKey(workspaceDto.ApiKey);
-
-            if (null != account)
+            try
             {
-                //find the workspace
-                var workspace = _workspaceRepository.GetByName(account.Id, workspaceDto.Name);
+                //validate api key
+                var account = _accountRepository
+                    .GetByApiKey(workspaceDto.ApiKey);
 
-                //create new workspace
-                if (null == workspace)
+                if (null != account)
                 {
-                    workspace = new Workspace
-                    {
-                        AccountId = account.Id,
+                    //find the workspace
+                    var workspace = _workspaceRepository.GetByName(account.Id, workspaceDto.Name);
 
-                        Name = workspaceDto.Name,
-                        Description = workspaceDto.Description,
-                        Owners = workspaceDto.Owners,
-                        Solutions = workspaceDto.Solutions,
-                        Logs = workspaceDto.Logs
+                    //create new workspace
+                    if (null == workspace)
+                    {
+                        workspace = new Workspace
+                        {
+                            AccountId = account.Id,
+
+                            Name = workspaceDto.Name,
+                            Description = workspaceDto.Description,
+                            Owners = workspaceDto.Owners,
+                            Solutions = workspaceDto.Solutions,
+                            Logs = workspaceDto.Logs
+                        };
+                        _workspaceRepository.Create(workspace);
+                    }
+                    //update existing workspace
+                    else
+                    {
+                        workspace.Solutions = workspaceDto.Solutions;
+                        workspace.Logs = workspace.Logs;
+                        workspace.DateUpdated = DateTime.UtcNow;
+                        _workspaceRepository.Update(workspace);
+                    }
+
+                    string baseUri = "http://arnis.azurewebsites.net";
+                    string workspaceLocation = $"{baseUri}/{account.UserName.ToLower()}/{workspace.Name.ToLower()}";
+                    HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+                    HttpContext.Response.Headers.Add("Location", workspaceLocation);
+
+                    var responseDto = new
+                    {
+                        workspace = workspace.Name,
+                        workspaceUri = workspaceLocation
                     };
-                    _workspaceRepository.Create(workspace);
+
+                    return new HttpOkObjectResult(responseDto);
                 }
-                //update existing workspace
                 else
                 {
-                    workspace.Solutions = workspaceDto.Solutions;
-                    workspace.Logs = workspace.Logs;
-                    workspace.DateUpdated = DateTime.UtcNow;
-                    _workspaceRepository.Update(workspace);
+                    HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 }
-
-                string baseUri = "http://arnis.azurewebsites.net";
-                string workspaceLocation = $"{baseUri}/{account.UserName.ToLower()}/{workspace.Name.ToLower()}";
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
-                HttpContext.Response.Headers.Add("Location", workspaceLocation);
-
-                var responseDto = new
-                {
-                    workspace = workspace.Name,
-                    workspaceUri = workspaceLocation
-                };
-
-                return new HttpOkObjectResult(responseDto);
             }
-            else
+            catch (Exception ex)
             {
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                return new ObjectResult(new
+                {
+                    errorMessage = ex.Message,
+                    errorDetails = ex.ToString()
+                });
             }
 
             return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
