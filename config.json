@@ -1,5 +1,6 @@
 {
-    "endpointUri": "https://arnisdb.documents.azure.com:443/",
-    "primaryKey": "Qz1iWZxei7SN7CKlkUB8rEf4ECHjDtMjdtQcjXEQbDKEr5gDqlocsLXdqQ2EyIj17EEIcwyZ0VIy33uCmyM75g==",
-    "secondaryKey": "rMGsgCwXZEjpxcS0uPQTV8qKo6CXL1qgZD08TNoc9MyPQvCuzZhQVvDx1LC7QvmNUZzT9MkvZgNrjQdD0ZDAzQ=="
+    "Arnis.Web.BaseUri": "http://arnis.azurewebsites.net",
+    "Azure.DocumentDB.EndpointUri": "https://arnisdb.documents.azure.com:443/",
+    "Azure.DocumentDB.PrimaryKey": "Qz1iWZxei7SN7CKlkUB8rEf4ECHjDtMjdtQcjXEQbDKEr5gDqlocsLXdqQ2EyIj17EEIcwyZ0VIy33uCmyM75g==",
+    "Azure.DocumentDB.SecondaryKey": "rMGsgCwXZEjpxcS0uPQTV8qKo6CXL1qgZD08TNoc9MyPQvCuzZhQVvDx1LC7QvmNUZzT9MkvZgNrjQdD0ZDAzQ=="
 }

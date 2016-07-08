@@ -34,7 +34,7 @@ namespace Arnis.Web.Controllers
             //check if account already exists
             var userName = request.Email.Substring(0, request.Email.IndexOf("@", StringComparison.Ordinal));
             var accountExists = _accountRepository
-                .GetByUserName(request.UserName)                
+                .GetByUserName(userName)                
                 != null;
 
             if (!accountExists)
@@ -62,8 +62,9 @@ namespace Arnis.Web.Controllers
                 };
                 await _workspaceRepository.Create(workspace);
 
-                string accountLocation = $"{Request.Scheme}://{Request.Host}/accounts/{account.UserName.ToLower()}";
-                string workspaceLocation = $"{Request.Scheme}://{Request.Host}/{account.UserName}/workspaces/{workspace.Name.ToLower()}";
+                string baseUri = "http://arnis.azurewebsites.net";
+                string accountLocation = $"{baseUri}/{account.UserName.ToLower()}";
+                string workspaceLocation = $"{baseUri}/{account.UserName.ToLower()}/{workspace.Name.ToLower()}";
 
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
                 HttpContext.Response.Headers.Add("Location", accountLocation);
