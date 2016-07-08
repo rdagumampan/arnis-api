@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Arnis.API.Models
+namespace Arnis.Core.Documents
 {
     public class Workspace : DocumentBase
     {

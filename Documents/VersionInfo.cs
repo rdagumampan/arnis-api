@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Arnis.API.Models
+namespace Arnis.Core.Documents
 {
     public abstract class VersionInfo: DocumentBase
     {

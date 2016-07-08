@@ -1,7 +1,7 @@
-using System;
+    using System;
 using Newtonsoft.Json;
 
-namespace Arnis.API.Models
+namespace Arnis.Core.Documents
 {
     public class WorkspaceHit : DocumentBase
     {

@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using Arnis.API.Models;
 using System.Threading.Tasks;
+using Arnis.Core.Documents;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 

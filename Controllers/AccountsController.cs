@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Arnis.API.Repositiories;
 using Arnis.API.Models;
+using Arnis.Core.Documents;
 using Microsoft.AspNet.Mvc;
 
 namespace Arnis.Web.Controllers

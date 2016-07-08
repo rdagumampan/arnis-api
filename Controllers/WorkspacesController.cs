@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.AspNet.Mvc;
 using Arnis.API.Repositiories;
 using Arnis.API.Models;
+using Arnis.Core.Documents;
 
 namespace Arnis.Web.ApiControllers
 {
