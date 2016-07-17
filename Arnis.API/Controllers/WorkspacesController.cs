@@ -1,6 +1,6 @@
 using System;
 using System.Net;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Arnis.API.Repositiories;
 using Arnis.API.Models;
 using Arnis.Documents;
@@ -26,7 +26,7 @@ namespace Arnis.Web.ApiControllers
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 
             try
@@ -64,6 +64,8 @@ namespace Arnis.Web.ApiControllers
                         _workspaceRepository.Update(workspace);
                     }
 
+                    //process workspace statistics
+
                     string baseUri = "http://arnis.azurewebsites.net";
                     string workspaceLocation = $"{baseUri}/{account.UserName.ToLower()}/{workspace.Name.ToLower()}";
                     HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
@@ -75,7 +77,7 @@ namespace Arnis.Web.ApiControllers
                         workspaceUri = workspaceLocation
                     };
 
-                    return new HttpOkObjectResult(responseDto);
+                    return new OkObjectResult(responseDto);
                 }
                 else
                 {
@@ -92,7 +94,7 @@ namespace Arnis.Web.ApiControllers
                 });
             }
 
-            return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Arnis.API.Repositiories;
 using Arnis.API.Models;
 using Arnis.Documents;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Arnis.Web.Controllers
 {
@@ -28,7 +28,7 @@ namespace Arnis.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 
             try
@@ -79,7 +79,7 @@ namespace Arnis.Web.Controllers
                         workspaceUri = workspaceLocation
                     };
 
-                    return new HttpOkObjectResult(responseDto);
+                    return new OkObjectResult(responseDto);
                 }
                 else
                 {

@@ -17,8 +17,8 @@ namespace Arnis.Documents
         [JsonProperty("email")]
         public string Email { get; set; }
 
-        [JsonProperty("dateCreated")]
-        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+        [JsonProperty("dateInserted")]
+        public DateTime DateInserted { get; set; } = DateTime.UtcNow;
 
         [JsonProperty("dateUpdated")]
         public DateTime DateUpdated { get; set; } = DateTime.UtcNow;

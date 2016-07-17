@@ -27,8 +27,8 @@ namespace Arnis.Documents
         [JsonProperty("logs")]
         public List<string> Logs { get; set; }
 
-        [JsonProperty("dateCreated")]
-        public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+        [JsonProperty("dateInserted")]
+        public DateTime DateInserted{ get; set; } = DateTime.UtcNow;
 
         [JsonProperty("dateUpdated")]
         public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
