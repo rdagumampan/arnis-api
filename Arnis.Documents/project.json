@@ -1,11 +1,29 @@
 {
-  "description": "Azure DocumentDB objects used by Arnis API",
+  "description": "Azure DocumentDB documents for use by Arnis API",
   "title": "Arnis.Documents",
-  "version": "0.2.0-*",
+  "version": "0.2.1-*",
+  "authors": [ "rdagumampan" ],
   "dependencies": {
     "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {
     "net452": {}
+  },
+  "buildOptions": {
+    "debugType": "portable",
+    "xmlDoc": false
+  },
+  "packOptions": {
+    "projectUrl": "https://github.com/rdagumampan/arnis",
+    "owners": [ "rdagumampan" ],
+    "tags": [ "arnis", "dependency", "tracker" ],
+    "files": {
+      "include": "%project:Directory%/bin/release/*.nupkg"
+    }
+  },
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build"
+    ]
   }
 }

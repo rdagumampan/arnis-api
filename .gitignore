@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Arnis.Documents/bin
+/Arnis.Documents/obj/Debug
+/Arnis.Documents/obj/Release/net452
+/.vs
