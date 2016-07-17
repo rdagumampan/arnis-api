@@ -31,7 +31,6 @@ namespace Arnis.Web.Controllers
                 return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 
-
             try
             {
                 //check if account already exists
